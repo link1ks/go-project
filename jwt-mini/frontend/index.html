@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JWT Mini 云盘</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>JWT Mini 云盘</h1>
+      <p class="subtitle">前端 Docker · 后端本机运行</p>
+      <p class="api-hint" id="api-hint"></p>
+    </header>
+
+    <div id="status" class="status hidden"></div>
+
+    <!-- 登录页 -->
+    <section id="login-section" class="card auth-card">
+      <h2>登录</h2>
+      <p class="auth-desc">使用已有账号登录云盘</p>
+      <form id="login-form" class="auth-form">
+        <label>
+          用户名
+          <input type="text" id="login-username" placeholder="请输入用户名" autocomplete="username" required />
+        </label>
+        <label>
+          密码
+          <input type="password" id="login-password" placeholder="请输入密码" autocomplete="current-password" required />
+        </label>
+        <button type="submit" class="btn primary btn-block">登录</button>
+      </form>
+      <p class="auth-footer">
+        还没有账号？
+        <button type="button" id="go-register-btn" class="link-btn">立即注册</button>
+      </p>
+    </section>
+
+    <!-- 注册页 -->
+    <section id="register-section" class="card auth-card hidden">
+      <h2>注册</h2>
+      <p class="auth-desc">创建新账号，注册成功后可登录使用</p>
+      <form id="register-form" class="auth-form">
+        <label>
+          用户名
+          <input type="text" id="reg-username" placeholder="3-32 个字符" autocomplete="username" required minlength="3" maxlength="32" />
+        </label>
+        <label>
+          手机号 <span class="optional">（选填）</span>
+          <input type="tel" id="reg-phone" placeholder="11 位手机号" pattern="1[3-9]\d{9}" maxlength="11" />
+        </label>
+        <label>
+          密码
+          <input type="password" id="reg-password" placeholder="至少 6 位" autocomplete="new-password" required minlength="6" />
+        </label>
+        <label>
+          确认密码
+          <input type="password" id="reg-password2" placeholder="再次输入密码" autocomplete="new-password" required minlength="6" />
+        </label>
+        <button type="submit" class="btn primary btn-block">注册</button>
+      </form>
+      <p class="auth-footer">
+        已有账号？
+        <button type="button" id="go-login-btn" class="link-btn">返回登录</button>
+      </p>
+    </section>
+
+    <!-- 主界面 -->
+    <section id="main-section" class="hidden">
+      <nav class="main-nav card">
+        <button type="button" id="nav-files-btn" class="nav-btn active">我的文件</button>
+        <button type="button" id="nav-profile-btn" class="nav-btn">个人主页</button>
+        <button type="button" id="logout-btn" class="btn ghost nav-logout">退出</button>
+      </nav>
+
+      <!-- 文件页 -->
+      <div id="files-panel">
+        <div class="toolbar card">
+          <div class="user-info">
+            <span id="welcome-text"></span>
+          </div>
+          <div class="upload-box">
+            <input type="file" id="file-input" />
+            <button id="upload-btn" class="btn primary">上传文件</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="list-header">
+            <h2>我的文件</h2>
+            <button id="refresh-btn" class="btn ghost">刷新</button>
+          </div>
+          <div id="file-list" class="file-list empty">暂无文件</div>
+        </div>
+      </div>
+
+      <!-- 个人主页 -->
+      <div id="profile-panel" class="hidden">
+        <div class="card profile-card">
+          <div class="profile-header">
+            <div class="avatar" id="profile-avatar">U</div>
+            <div>
+              <h2 id="profile-username">—</h2>
+              <p class="profile-id" id="profile-userid">ID: —</p>
+            </div>
+          </div>
+          <dl class="profile-info">
+            <div class="info-row">
+              <dt>手机号</dt>
+              <dd id="profile-phone">未绑定</dd>
+            </div>
+            <div class="info-row">
+              <dt>注册时间</dt>
+              <dd id="profile-created">—</dd>
+            </div>
+            <div class="info-row">
+              <dt>文件数量</dt>
+              <dd id="profile-file-count">0</dd>
+            </div>
+            <div class="info-row">
+              <dt>权限</dt>
+              <dd id="profile-perms">—</dd>
+            </div>
+          </dl>
+          <button type="button" id="profile-refresh-btn" class="btn ghost">刷新资料</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

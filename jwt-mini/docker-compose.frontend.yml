@@ -1,0 +1,13 @@
+# 仅部署前端；后端/MySQL/Redis/MinIO 在本机按 init.go 配置运行
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: jwt-mini-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    environment:
+      # 浏览器访问本机后端，不是 Docker 内部地址
+      API_BASE: http://localhost:8080
